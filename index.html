@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TribeBuilder — iOS Social Media SDK</title>
+    <meta name="description" content="TribeBuilder is an open-source iOS SDK for multi-platform social media publishing. Built with Swift, SwiftUI, and SwiftData.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .hero {
+            padding: 80px 24px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%);
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00d4aa, #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        .hero .tagline {
+            font-size: 18px;
+            color: #8888aa;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(0,212,170,0.3);
+            color: #00d4aa;
+        }
+        .section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        .section h2 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(0,212,170,0.2);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .feature-card h3 {
+            font-size: 16px;
+            color: #00d4aa;
+            margin-bottom: 8px;
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: #8888aa;
+        }
+        .code-block {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'SF Mono', 'Menlo', monospace;
+            font-size: 13px;
+            color: #c0c0c0;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .code-block .keyword { color: #ff79c6; }
+        .code-block .type { color: #8be9fd; }
+        .code-block .string { color: #f1fa8c; }
+        .code-block .comment { color: #6272a4; }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .tech-tag {
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(0,180,216,0.1);
+            border: 1px solid rgba(0,180,216,0.2);
+            font-size: 13px;
+            color: #00b4d8;
+        }
+        .links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .links a {
+            color: #00d4aa;
+            text-decoration: none;
+            padding: 10px 24px;
+            border: 1px solid rgba(0,212,170,0.4);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .links a:hover {
+            background: rgba(0,212,170,0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: #555;
+            font-size: 13px;
+        }
+        footer a { color: #00d4aa; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>TribeBuilder</h1>
+        <p class="tagline">An iOS SDK and app for multi-platform social media publishing. Built with Swift, SwiftUI, and SwiftData — designed for independent music artists.</p>
+        <div class="badge-row">
+            <span class="badge">Swift 5.9</span>
+            <span class="badge">iOS 17+</span>
+            <span class="badge">SwiftUI</span>
+            <span class="badge">SwiftData</span>
+        </div>
+        <div class="links">
+            <a href="https://github.com/lanmind2001">GitHub</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#platforms">Platforms</a>
+        </div>
+    </div>
+
+    <div class="section" id="architecture">
+        <h2>Architecture</h2>
+        <p>TribeBuilder is built as a modular iOS application using modern Swift concurrency, SwiftUI for the UI layer, and SwiftData for persistence. The publishing pipeline supports multiple social platforms through a unified protocol-based interface.</p>
+
+        <div class="code-block">
+            <span class="comment">// Unified publisher protocol</span><br>
+            <span class="keyword">protocol</span> <span class="type">SocialMediaPublisher</span> {<br>
+            &nbsp;&nbsp;<span class="keyword">var</span> platform: <span class="type">SocialPlatform</span> { <span class="keyword">get</span> }<br>
+            &nbsp;&nbsp;<span class="keyword">func</span> publishText(_ text: <span class="type">String</span>, mediaURLs: [<span class="type">URL</span>]?) <span class="keyword">async throws</span> -> <span class="type">PublishResult</span><br>
+            &nbsp;&nbsp;<span class="keyword">func</span> refreshToken(_ tokens: <span class="type">OAuthTokens</span>) <span class="keyword">async throws</span> -> <span class="type">OAuthTokens</span><br>
+            }
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Content Generation</h3>
+                <p>Multi-provider AI content generation with BYOK support for ChatGPT, Gemini, Grok, DALL-E, and Gemini Vision.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Publishing Pipeline</h3>
+                <p>Three-tier fallback publishing with retry logic, offline queue, and background task scheduling via BGTaskScheduler.</p>
+            </div>
+            <div class="feature-card">
+                <h3>OAuth Management</h3>
+                <p>Unified OAuth 2.0 + PKCE flow for all platforms with proactive token refresh and Keychain-backed secure storage.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Strategy Engine</h3>
+                <p>AI-powered content strategy planning with persona matching, auto-scheduling, and review queue for generated content.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="platforms">
+        <h2>Supported Platforms</h2>
+        <p>TribeBuilder integrates with major social media platforms through their official APIs:</p>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>TikTok</h3>
+                <p>Content Posting API v2 — photo (PULL_FROM_URL) and video (FILE_UPLOAD) with three-tier post mode fallback.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Instagram</h3>
+                <p>Graph API — photo and carousel publishing with image hosting via Supabase Storage.</p>
+            </div>
+            <div class="feature-card">
+                <h3>YouTube</h3>
+                <p>Data API v3 — video upload with metadata, privacy settings, and channel management.</p>
+            </div>
+            <div class="feature-card">
+                <h3>X / Twitter</h3>
+                <p>API v2 — tweet posting with media upload, thread support, and OAuth 2.0 PKCE.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Tech Stack</h2>
+        <div class="tech-stack">
+            <span class="tech-tag">Swift 5.9</span>
+            <span class="tech-tag">SwiftUI</span>
+            <span class="tech-tag">SwiftData</span>
+            <span class="tech-tag">iOS 17+</span>
+            <span class="tech-tag">Async/Await</span>
+            <span class="tech-tag">WidgetKit</span>
+            <span class="tech-tag">BGTaskScheduler</span>
+            <span class="tech-tag">OSLog</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">Cloudflare Workers</span>
+            <span class="tech-tag">StoreKit 2</span>
+            <span class="tech-tag">ASWebAuthenticationSession</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>TribeBuilder &copy; 2026 &middot; Built with Swift &middot; <a href="https://github.com/lanmind2001">@lanmind2001</a></p>
+    </footer>
+</body>
+</html>
