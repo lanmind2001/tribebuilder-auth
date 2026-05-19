@@ -15,15 +15,16 @@
         ul { margin: 0 0 16px 24px; }
         li { margin-bottom: 8px; }
         a { color: #00d4aa; }
+        .highlight { background: #fffbe6; border-left: 4px solid #f5c518; padding: 16px 20px; margin: 20px 0; border-radius: 4px; }
         .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid #ddd; font-size: 13px; color: #888; }
     </style>
 </head>
 <body>
-<div class="container">
+    <div class="container">
     <h1>Privacy Policy</h1>
-    <p class="date">Effective Date: May 18, 2026</p>
+    <p class="date">Effective Date: May 19, 2026</p>
 
-    <p>TribeBuilder ("we", "our", or "the app") is a social media management tool for music artists. This policy explains how we collect, use, and protect your information.</p>
+    <p>TribeBuilder is a product of <strong>Brown Technologies Inc</strong> ("we", "us", "our", or "the company"). TribeBuilder ("the app") is a social media management tool for music artists. This policy explains how we collect, use, and protect your information.</p>
 
     <h2>1. Information We Collect</h2>
     <p>TribeBuilder collects the following categories of information:</p>
@@ -32,7 +33,7 @@
         <li><strong>Account credentials:</strong> API keys you provide for AI services are stored locally on your device in the iOS Keychain and are never transmitted to our servers.</li>
         <li><strong>Social media tokens:</strong> OAuth access tokens and refresh tokens for platforms you connect (Instagram, TikTok, X/Twitter, YouTube, Facebook, Bluesky, Threads, Discord). These are stored locally in the iOS Keychain on your device.</li>
         <li><strong>Profile information:</strong> Display names, usernames, follower counts, and profile pictures retrieved from connected social media platforms.</li>
-        <li><strong>Content you create:</strong> Text captions, AI-generated images, persona profiles, content calendars, and post metadata created within the app. This content is stored locally on your device using Apple's SwiftData framework.</li>
+        <li><strong>Content you create:</strong> Text captions, AI-generated images, persona profiles, content calendars, and post metadata created within the app. This content is stored locally on your device using Apple’s SwiftData framework.</li>
         <li><strong>Analytics data:</strong> Follower counts, engagement metrics, and post performance data retrieved from your connected social media platforms. This data is stored locally on your device.</li>
         <li><strong>Usage data:</strong> We do not collect analytics, crash reports, or usage telemetry. We do not use any third-party analytics SDKs.</li>
     </ul>
@@ -48,66 +49,86 @@
         <li>To provide strategy recommendations based on your content and engagement history.</li>
     </ul>
 
-    <h2>3. Third-Party Services</h2>
-    <p>TribeBuilder interacts with the following third-party services when you choose to use them:</p>
+    <h2>3. AI-Powered Features and Third-Party AI Data Sharing</h2>
+    <div class="highlight">
+        <p><strong>Important:</strong> TribeBuilder uses a “bring your own key” (BYOK) model for AI services. You provide your own API key for the AI provider of your choice. No AI provider API keys are pre-loaded or shared between users.</p>
+    </div>
+    <p>TribeBuilder includes AI-powered content generation features. When you use these features, the following data may be sent to the third-party AI provider you have selected and configured:</p>
     <ul>
-        <li><strong>Authentication providers:</strong> Apple (Sign in with Apple) and Microsoft (Entra External ID). We use these services to verify your identity. Apple's privacy practices are governed by <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a>.</li>
-        <li><strong>Social media platforms:</strong> Instagram (Meta), TikTok, X (Twitter), YouTube (Google), Facebook (Meta), Bluesky, Threads (Meta), and Discord. Data shared is limited to what is necessary for authentication, content publishing, and retrieving your analytics.</li>
-        <li><strong>AI providers:</strong> Anthropic (Claude), OpenAI (ChatGPT/DALL-E), Google (Gemini), xAI (Grok). When you generate content, the prompts and persona context you create are sent to the provider you select. We do not control how these providers process data — refer to their respective privacy policies.</li>
-        <li><strong>Image hosting:</strong> Generated images are temporarily uploaded to Supabase Storage to provide public URLs required by social media publishing APIs. Images are associated with anonymous UUIDs, not your personal information.</li>
+        <li><strong>Persona context:</strong> Information from your artist persona profile (voice, style, audience, themes) that you created within the app.</li>
+        <li><strong>Content prompts:</strong> The text prompts and instructions you provide or that the app constructs on your behalf to generate captions, images, or strategy suggestions.</li>
+        <li><strong>Platform context:</strong> The name of the target social media platform(s) for which content is being generated, so the AI can tailor output format and tone.</li>
+    </ul>
+    <p>The supported third-party AI providers are:</p>
+    <ul>
+        <li>Anthropic (Claude)</li>
+        <li>OpenAI (ChatGPT and DALL-E)</li>
+        <li>Google (Gemini and Gemini Vision)</li>
+        <li>xAI (Grok)</li>
+    </ul>
+    <p><strong>Your data is sent directly from the app on your device to the AI provider you selected, using the API key you provided.</strong> Brown Technologies Inc does not receive, store, relay, or have access to the data exchanged between your device and the AI provider. We do not control how these providers process, store, or use the data they receive — please refer to each provider’s own privacy policy.</p>
+    <p><strong>Explicit consent:</strong> AI features are entirely opt-in. No data is sent to any AI provider unless you (a) provide your own API key for that provider, and (b) actively initiate a content generation action. You may remove your API key at any time to stop all data sharing with that provider.</p>
+
+    <h2>4. Other Third-Party Services</h2>
+    <p>In addition to AI providers, TribeBuilder interacts with the following third-party services when you choose to use them:</p>
+    <ul>
+        <li><strong>Authentication providers:</strong> Apple (Sign in with Apple) and Microsoft (Entra External ID). We use these services solely to verify your identity. Apple’s privacy practices are governed by <a href="https://www.apple.com/legal/privacy/">Apple’s Privacy Policy</a>.</li>
+        <li><strong>Social media platforms:</strong> Instagram (Meta), TikTok, X (Twitter), YouTube (Google), Facebook (Meta), Bluesky, Threads (Meta), and Discord. Data shared is limited to what is necessary for authentication, content publishing, and retrieving your analytics. Each platform connection uses the standard OAuth 2.0 authorization flow, and you must authorize access through each platform’s official login page.</li>
+        <li><strong>Image hosting:</strong> When publishing image content, generated images may be temporarily uploaded to Supabase Storage to provide URLs required by certain social media publishing APIs. These images are stored with anonymous identifiers and are not linked to your personal information. Images are stored securely and access is limited to the specific URLs generated for publishing purposes.</li>
     </ul>
 
-    <h2>4. Data Storage and Security</h2>
+    <h2>5. Data Storage and Security</h2>
     <ul>
         <li>All sensitive credentials (API keys, OAuth tokens, session data) are stored in the iOS Keychain, which provides hardware-backed encryption.</li>
-        <li>Content data, persona profiles, and analytics snapshots are stored locally on your device using Apple's SwiftData framework.</li>
+        <li>Content data, persona profiles, and analytics snapshots are stored locally on your device using Apple’s SwiftData framework.</li>
         <li>We do not operate backend servers that store your personal data. The app communicates directly with third-party APIs using credentials stored on your device.</li>
-        <li>Temporarily hosted images on Supabase Storage are stored in a public bucket and may be accessed by anyone with the URL. We recommend treating published image URLs as public content.</li>
+        <li>All network communication with third-party services uses HTTPS/TLS encryption.</li>
     </ul>
 
-    <h2>5. Data Retention</h2>
+    <h2>6. Data Retention</h2>
     <ul>
         <li>Authentication session data is retained until you sign out or uninstall the app.</li>
         <li>OAuth tokens are retained until you disconnect the platform, sign out, or uninstall the app.</li>
         <li>Content, persona, and analytics data are retained locally on your device until you delete them within the app or uninstall the app.</li>
-        <li>Images uploaded to Supabase Storage for publishing are retained indefinitely unless manually deleted. These images are not linked to your identity.</li>
+        <li>Images uploaded for publishing purposes are retained on Supabase Storage until manually deleted. These images are not linked to your identity.</li>
         <li>We do not retain any data on our servers.</li>
     </ul>
 
-    <h2>6. Data Sharing</h2>
-    <p>We do not sell, rent, or share your personal information with third parties for marketing or advertising purposes. Data is only shared with the third-party services listed above, and only when you initiate an action (e.g., publishing a post, connecting a platform, generating AI content).</p>
+    <h2>7. Data Sharing</h2>
+    <p>We do not sell, rent, or share your personal information with third parties for marketing or advertising purposes.</p>
+    <p>Data is only shared with the third-party services listed above, and only when you initiate an action (e.g., publishing a post, connecting a platform, generating AI content). Each third party that receives your data is required to handle it in accordance with their own published privacy policies.</p>
 
-    <h2>7. Tracking and Advertising</h2>
+    <h2>8. Tracking and Advertising</h2>
     <p>TribeBuilder does not track you across other apps or websites. We do not use advertising identifiers, fingerprinting, or any tracking technologies. We do not display advertisements within the app.</p>
 
-    <h2>8. Demo Mode</h2>
+    <h2>9. Demo Mode</h2>
     <p>TribeBuilder offers a Demo Mode that allows you to explore the app with sample data. When using Demo Mode, no real social media accounts are connected, no real API calls are made to AI providers, and no content is published to any platform. Demo Mode data is stored locally and cleared when you sign out.</p>
 
-    <h2>9. Your Rights</h2>
+    <h2>10. Your Rights</h2>
     <ul>
-        <li><strong>Disconnect platforms:</strong> You can disconnect any social media platform at any time from the app's settings. This removes stored tokens from your device.</li>
-        <li><strong>Delete API keys:</strong> You can remove any AI service API key from the app's settings.</li>
+        <li><strong>Disconnect platforms:</strong> You can disconnect any social media platform at any time from the app’s settings. This removes stored tokens from your device.</li>
+        <li><strong>Delete API keys:</strong> You can remove any AI service API key from the app’s settings, immediately stopping all data sharing with that provider.</li>
         <li><strong>Delete app data:</strong> Uninstalling the app removes all locally stored data, including Keychain entries and SwiftData content.</li>
-        <li><strong>Revoke access:</strong> You can revoke TribeBuilder's access from each social media platform's settings page independently.</li>
-        <li><strong>Sign in with Apple:</strong> You can stop using your Apple ID with TribeBuilder at any time via Settings > Apple ID > Sign-In & Security > Sign in with Apple on your device.</li>
-        <li><strong>Data deletion request:</strong> You can request deletion of any data associated with your account by visiting our <a href="https://tribebuilder.is-a.dev/data-deletion.html">data deletion page</a> or contacting us at the email below.</li>
+        <li><strong>Revoke access:</strong> You can revoke TribeBuilder’s access from each social media platform’s settings page independently.</li>
+        <li><strong>Sign in with Apple:</strong> You can stop using your Apple ID with TribeBuilder at any time via Settings &gt; Apple ID &gt; Sign-In &amp; Security &gt; Sign in with Apple on your device.</li>
+        <li><strong>Data deletion request:</strong> You can request deletion of any data associated with your account by visiting our <a href="/data-deletion">data deletion page</a> or contacting us at the email below.</li>
     </ul>
 
-    <h2>10. Children's Privacy</h2>
+    <h2>11. Children’s Privacy</h2>
     <p>TribeBuilder is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child under 13 has provided us with personal information, please contact us so we can take appropriate action.</p>
 
-    <h2>11. International Users</h2>
-    <p>TribeBuilder stores all data locally on your device. When you use third-party services (social media platforms, AI providers), your data may be transferred to and processed in countries where those services operate. Please refer to each service's privacy policy for details on their data handling practices.</p>
+    <h2>12. International Users</h2>
+    <p>TribeBuilder stores all data locally on your device. When you use third-party services (social media platforms, AI providers), your data may be transferred to and processed in countries where those services operate. Please refer to each service’s privacy policy for details on their data handling practices.</p>
 
-    <h2>12. Changes to This Policy</h2>
+    <h2>13. Changes to This Policy</h2>
     <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated effective date. We encourage you to review this policy periodically.</p>
 
-    <h2>13. Contact</h2>
+    <h2>14. Contact</h2>
     <p>If you have questions about this privacy policy or wish to exercise your data rights, contact us at <a href="mailto:lanmind2001@gmail.com">lanmind2001@gmail.com</a>.</p>
 
     <div class="footer">
-        &copy; 2026 TribeBuilder. All rights reserved.
+        &copy; 2026 Brown Technologies Inc. All rights reserved.
     </div>
-</div>
+    </div>
 </body>
 </html>
