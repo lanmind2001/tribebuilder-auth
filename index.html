@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TribeBuilder — iOS Social Media SDK</title>
-    <meta name="description" content="TribeBuilder is an open-source iOS SDK for multi-platform social media publishing. Built with Swift, SwiftUI, and SwiftData.">
+    <title>TribeBuilder — Social Media Management for Artists</title>
+    <meta name="description" content="TribeBuilder is an iOS app that helps independent music artists create, schedule, and publish content across TikTok, Instagram, YouTube, and more.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -14,8 +14,10 @@
             line-height: 1.6;
             min-height: 100vh;
         }
+
+        /* ── Hero ── */
         .hero {
-            padding: 80px 24px 60px;
+            padding: 60px 24px 50px;
             text-align: center;
             background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 100%);
         }
@@ -25,20 +27,20 @@
             background: linear-gradient(135deg, #00d4aa, #00b4d8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         .hero .tagline {
             font-size: 18px;
             color: #8888aa;
-            max-width: 600px;
-            margin: 0 auto 32px;
+            max-width: 620px;
+            margin: 0 auto 24px;
         }
         .badge-row {
             display: flex;
             gap: 8px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
         .badge {
             display: inline-block;
@@ -49,18 +51,283 @@
             border: 1px solid rgba(0,212,170,0.3);
             color: #00d4aa;
         }
+        nav {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #00d4aa;
+            text-decoration: none;
+            padding: 10px 22px;
+            border: 1px solid rgba(0,212,170,0.4);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        nav a:hover { background: rgba(0,212,170,0.1); }
+
+        /* ── Sections ── */
         .section {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 50px 24px;
         }
         .section h2 {
-            font-size: 24px;
+            font-size: 26px;
             color: #fff;
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid rgba(0,212,170,0.2);
+            margin-bottom: 8px;
         }
+        .section .subtitle {
+            font-size: 15px;
+            color: #8888aa;
+            margin-bottom: 28px;
+        }
+
+        /* ── Login Flow (the key section for TikTok reviewers) ── */
+        .flow-section {
+            background: linear-gradient(180deg, rgba(0,212,170,0.04) 0%, transparent 100%);
+            border-top: 1px solid rgba(0,212,170,0.15);
+            border-bottom: 1px solid rgba(0,212,170,0.08);
+        }
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 12px;
+        }
+        .flow-step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+        .flow-step .step-num {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4aa, #00b4d8);
+            color: #0a0a1a;
+            font-weight: 800;
+            font-size: 13px;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+        .flow-step h3 {
+            font-size: 15px;
+            color: #fff;
+            margin: 12px 16px 8px;
+        }
+        .flow-step p {
+            font-size: 13px;
+            color: #8888aa;
+            padding: 0 16px 4px;
+            line-height: 1.5;
+        }
+        .phone-frame {
+            margin: 16px auto 20px;
+            width: 180px;
+            height: 340px;
+            border: 2px solid rgba(255,255,255,0.12);
+            border-radius: 24px;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+        }
+        .phone-frame .notch {
+            width: 80px;
+            height: 22px;
+            background: #0a0a1a;
+            border-radius: 0 0 14px 14px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .phone-screen {
+            padding: 8px 10px;
+            height: calc(100% - 22px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Phone mockup internals ── */
+        .mock-header {
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .mock-btn {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 6px;
+            border: none;
+        }
+        .mock-btn.tiktok { background: #111; border: 1px solid #00f2ea; color: #00f2ea; }
+        .mock-btn.instagram { background: #111; border: 1px solid #E1306C; color: #E1306C; }
+        .mock-btn.youtube { background: #111; border: 1px solid #FF0000; color: #FF0000; }
+        .mock-btn.connected { background: rgba(48,209,88,0.15); border: 1px solid #30D158; color: #30D158; }
+        .mock-btn.facebook { background: #111; border: 1px solid #1877F2; color: #1877F2; }
+
+        .mock-platform-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+            margin-bottom: 5px;
+            font-size: 9px;
+            color: #ccc;
+        }
+        .mock-platform-row .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .mock-platform-row .name { flex: 1; font-weight: 600; }
+        .mock-platform-row .status { font-size: 8px; }
+
+        .mock-consent-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 12px 10px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .mock-consent-box .tiktok-logo {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+        .mock-consent-box h4 {
+            font-size: 10px;
+            color: #161823;
+            margin-bottom: 4px;
+        }
+        .mock-consent-box p {
+            font-size: 8px;
+            color: #666;
+            padding: 0;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .mock-consent-box .scope-list {
+            text-align: left;
+            margin: 0 auto 10px;
+            font-size: 8px;
+            color: #333;
+        }
+        .mock-consent-box .scope-list div {
+            padding: 2px 0;
+        }
+        .mock-consent-btn {
+            background: #FE2C55;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px;
+            font-size: 9px;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .mock-success-icon {
+            font-size: 32px;
+            margin: 20px 0 8px;
+        }
+        .mock-success-text {
+            font-size: 11px;
+            color: #30D158;
+            font-weight: 700;
+        }
+        .mock-caption-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 6px 8px;
+            margin-top: 10px;
+            font-size: 8px;
+            color: #aaa;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .mock-publish-btn {
+            background: linear-gradient(135deg, #00d4aa, #00b4d8);
+            color: #0a0a1a;
+            border: none;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        /* ── Arrow between steps (desktop) ── */
+        .flow-arrow {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #00d4aa;
+        }
+        @media (min-width: 800px) {
+            .flow-steps {
+                grid-template-columns: 1fr auto 1fr auto 1fr;
+                align-items: start;
+            }
+            .flow-arrow { display: flex; padding-top: 180px; }
+        }
+
+        /* ── Technical Details ── */
+        .detail-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .detail-box h3 {
+            font-size: 16px;
+            color: #00d4aa;
+            margin-bottom: 8px;
+        }
+        .detail-box p, .detail-box li {
+            font-size: 13px;
+            color: #8888aa;
+        }
+        .detail-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .detail-box ul li {
+            padding: 3px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+        .detail-box ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00d4aa;
+            font-size: 12px;
+        }
+
+        /* ── Feature grid ── */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -82,6 +349,40 @@
             font-size: 13px;
             color: #8888aa;
         }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .tech-tag {
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(0,180,216,0.1);
+            border: 1px solid rgba(0,180,216,0.2);
+            font-size: 13px;
+            color: #00b4d8;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: #555;
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer a { color: #00d4aa; text-decoration: none; }
+        footer .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ── Code block ── */
         .code-block {
             background: rgba(0,0,0,0.4);
             border: 1px solid rgba(255,255,255,0.08);
@@ -97,140 +398,303 @@
         .code-block .type { color: #8be9fd; }
         .code-block .string { color: #f1fa8c; }
         .code-block .comment { color: #6272a4; }
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 16px;
+
+        /* ── Highlighted callout ── */
+        .callout {
+            background: rgba(0,212,170,0.06);
+            border-left: 3px solid #00d4aa;
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #ccc;
         }
-        .tech-tag {
-            padding: 6px 14px;
-            border-radius: 6px;
-            background: rgba(0,180,216,0.1);
-            border: 1px solid rgba(0,180,216,0.2);
-            font-size: 13px;
-            color: #00b4d8;
-        }
-        .links {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin-top: 24px;
-        }
-        .links a {
-            color: #00d4aa;
-            text-decoration: none;
-            padding: 10px 24px;
-            border: 1px solid rgba(0,212,170,0.4);
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .links a:hover {
-            background: rgba(0,212,170,0.1);
-        }
-        footer {
-            text-align: center;
-            padding: 40px 24px;
-            color: #555;
-            font-size: 13px;
-        }
-        footer a { color: #00d4aa; text-decoration: none; }
+        .callout strong { color: #00d4aa; }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>TribeBuilder</h1>
-        <p class="tagline">An iOS SDK and app for multi-platform social media publishing. Built with Swift, SwiftUI, and SwiftData — designed for independent music artists.</p>
-        <div class="badge-row">
-            <span class="badge">Swift 5.9</span>
-            <span class="badge">iOS 17+</span>
-            <span class="badge">SwiftUI</span>
-            <span class="badge">SwiftData</span>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- HERO                                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="hero">
+    <h1>TribeBuilder</h1>
+    <p class="tagline">An iOS app that helps independent music artists create AI-powered content and publish it across TikTok, Instagram, YouTube, and more — all from one place.</p>
+    <div class="badge-row">
+        <span class="badge">iOS App</span>
+        <span class="badge">Swift &amp; SwiftUI</span>
+        <span class="badge">AI Content Generation</span>
+        <span class="badge">Multi-Platform Publishing</span>
+    </div>
+    <nav>
+        <a href="#login-flow">Login Flow</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#platforms">Platforms</a>
+        <a href="#architecture">Architecture</a>
+    </nav>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- LOGIN FLOW (PRIMARY — for TikTok review) -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section flow-section" id="login-flow">
+    <h2>How Users Connect Their TikTok Account</h2>
+    <p class="subtitle">TribeBuilder is a native iOS app. Users connect their TikTok account through the standard OAuth 2.0 authorization flow, initiated in-app via Apple's secure ASWebAuthenticationSession browser.</p>
+
+    <div class="flow-steps">
+        <!-- Step 1 -->
+        <div class="flow-step">
+            <div class="step-num">1</div>
+            <h3>Open Platforms Screen</h3>
+            <p>User navigates to the Platforms section and taps "Connect" next to TikTok.</p>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="phone-screen">
+                    <div class="mock-header">Connect Your Platforms</div>
+                    <div class="mock-platform-row">
+                        <div class="dot" style="background:#00F2EA"></div>
+                        <span class="name">TikTok</span>
+                        <span class="mock-btn tiktok" style="width:auto;margin:0;padding:4px 10px;font-size:8px;">Connect</span>
+                    </div>
+                    <div class="mock-platform-row">
+                        <div class="dot" style="background:#E1306C"></div>
+                        <span class="name">Instagram</span>
+                        <span class="mock-btn instagram" style="width:auto;margin:0;padding:4px 10px;font-size:8px;">Connect</span>
+                    </div>
+                    <div class="mock-platform-row">
+                        <div class="dot" style="background:#FF0000"></div>
+                        <span class="name">YouTube</span>
+                        <span class="mock-btn youtube" style="width:auto;margin:0;padding:4px 10px;font-size:8px;">Connect</span>
+                    </div>
+                    <div class="mock-platform-row">
+                        <div class="dot" style="background:#1877F2"></div>
+                        <span class="name">Facebook</span>
+                        <span class="mock-btn facebook" style="width:auto;margin:0;padding:4px 10px;font-size:8px;">Connect</span>
+                    </div>
+                    <div style="flex:1"></div>
+                    <div style="font-size:8px;color:#555;text-align:center;padding:8px 0;">Tap Connect to link your account</div>
+                </div>
+            </div>
         </div>
-        <div class="links">
-            <a href="https://github.com/lanmind2001">GitHub</a>
-            <a href="#architecture">Architecture</a>
-            <a href="#platforms">Platforms</a>
+
+        <div class="flow-arrow">&rarr;</div>
+
+        <!-- Step 2 -->
+        <div class="flow-step">
+            <div class="step-num">2</div>
+            <h3>TikTok OAuth Login</h3>
+            <p>TikTok's official authorization page opens in a secure browser. User logs in and grants permissions.</p>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="phone-screen">
+                    <div style="font-size:8px;color:#999;text-align:center;padding:4px 0;background:rgba(255,255,255,0.05);border-radius:4px;margin-bottom:6px;">tiktok.com/v2/auth/authorize</div>
+                    <div class="mock-consent-box">
+                        <div class="tiktok-logo">♪</div>
+                        <h4>TribeBuilder wants to access your TikTok account</h4>
+                        <div class="scope-list">
+                            <div>&#10003; View your profile info</div>
+                            <div>&#10003; View your account stats</div>
+                            <div>&#10003; Post content on your behalf</div>
+                            <div>&#10003; Upload videos</div>
+                            <div>&#10003; View your video list</div>
+                        </div>
+                        <button class="mock-consent-btn">Authorize App</button>
+                        <p style="margin-top:6px;margin-bottom:0;font-size:7px;color:#999;">By authorizing, you agree to TikTok's Terms of Service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flow-arrow">&rarr;</div>
+
+        <!-- Step 3 -->
+        <div class="flow-step">
+            <div class="step-num">3</div>
+            <h3>Connected — Create &amp; Publish</h3>
+            <p>Account is linked. User creates content with AI and publishes directly to TikTok.</p>
+            <div class="phone-frame">
+                <div class="notch"></div>
+                <div class="phone-screen">
+                    <div class="mock-header">Create Content</div>
+                    <div class="mock-platform-row" style="background:rgba(0,242,234,0.1);border:1px solid rgba(0,242,234,0.3);">
+                        <div class="dot" style="background:#00F2EA"></div>
+                        <span class="name" style="color:#00F2EA;">TikTok</span>
+                        <span style="font-size:8px;color:#30D158;">&#10003; Connected</span>
+                    </div>
+                    <div class="mock-caption-box">
+                        <div style="color:#00d4aa;font-size:7px;font-weight:700;margin-bottom:3px;">AI-GENERATED CAPTION</div>
+                        New track dropping this weekend. This one hits different. Been in the studio non-stop... &#127925;&#127775;
+                        <div style="color:#00F2EA;margin-top:4px;font-size:7px;">#newmusic #artist #studio</div>
+                    </div>
+                    <div style="flex:1"></div>
+                    <button class="mock-publish-btn">Publish to TikTok</button>
+                    <div style="font-size:7px;color:#555;text-align:center;padding:6px 0;">Uses TikTok Content Posting API v2</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="section" id="architecture">
-        <h2>Architecture</h2>
-        <p>TribeBuilder is built as a modular iOS application using modern Swift concurrency, SwiftUI for the UI layer, and SwiftData for persistence. The publishing pipeline supports multiple social platforms through a unified protocol-based interface.</p>
+    <!-- Technical OAuth details -->
+    <div class="callout" style="margin-top:32px;">
+        <strong>Technical Details:</strong> TribeBuilder uses TikTok's OAuth 2.0 authorization code flow. The app opens <code>https://www.tiktok.com/v2/auth/authorize/</code> in Apple's ASWebAuthenticationSession (a secure, sandboxed browser). After the user authorizes, TikTok redirects to <code>https://tribebuilder.is-a.dev/callback/</code> which returns the authorization code to the app. The app then exchanges this code for access and refresh tokens via <code>https://open.tiktokapis.com/v2/oauth/token/</code>. All tokens are stored securely — never exposed to the user.
+    </div>
 
-        <div class="code-block">
-            <span class="comment">// Unified publisher protocol</span><br>
-            <span class="keyword">protocol</span> <span class="type">SocialMediaPublisher</span> {<br>
-            &nbsp;&nbsp;<span class="keyword">var</span> platform: <span class="type">SocialPlatform</span> { <span class="keyword">get</span> }<br>
-            &nbsp;&nbsp;<span class="keyword">func</span> publishText(_ text: <span class="type">String</span>, mediaURLs: [<span class="type">URL</span>]?) <span class="keyword">async throws</span> -> <span class="type">PublishResult</span><br>
-            &nbsp;&nbsp;<span class="keyword">func</span> refreshToken(_ tokens: <span class="type">OAuthTokens</span>) <span class="keyword">async throws</span> -> <span class="type">OAuthTokens</span><br>
-            }
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px; margin-top:20px;">
+        <div class="detail-box">
+            <h3>OAuth Scopes Requested</h3>
+            <ul>
+                <li>user.info.basic — Basic user identification</li>
+                <li>user.info.profile — Profile display name &amp; avatar</li>
+                <li>user.info.stats — Follower count and engagement stats</li>
+                <li>video.publish — Post content directly to TikTok</li>
+                <li>video.upload — Upload media to TikTok inbox</li>
+                <li>video.list — View published content</li>
+            </ul>
         </div>
+        <div class="detail-box">
+            <h3>Content Posting API Usage</h3>
+            <ul>
+                <li>Photo publishing via PULL_FROM_URL (proxied through verified domain)</li>
+                <li>Video publishing via FILE_UPLOAD with chunked upload</li>
+                <li>Three-tier fallback: DIRECT_POST &rarr; SELF_ONLY &rarr; MEDIA_UPLOAD</li>
+                <li>Publish status polling until terminal state</li>
+                <li>Automatic token refresh before every publish attempt</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h3>Content Generation</h3>
-                <p>Multi-provider AI content generation with BYOK support for ChatGPT, Gemini, Grok, DALL-E, and Gemini Vision.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Publishing Pipeline</h3>
-                <p>Three-tier fallback publishing with retry logic, offline queue, and background task scheduling via BGTaskScheduler.</p>
-            </div>
-            <div class="feature-card">
-                <h3>OAuth Management</h3>
-                <p>Unified OAuth 2.0 + PKCE flow for all platforms with proactive token refresh and Keychain-backed secure storage.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Strategy Engine</h3>
-                <p>AI-powered content strategy planning with persona matching, auto-scheduling, and review queue for generated content.</p>
-            </div>
+<!-- ═══════════════════════════════════════ -->
+<!-- HOW IT WORKS                            -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="how-it-works">
+    <h2>How TribeBuilder Works</h2>
+    <p class="subtitle">A complete content creation and publishing pipeline for independent artists.</p>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>1. Build Your Persona</h3>
+            <p>Answer questions about your voice, style, audience, and themes. TribeBuilder learns how you talk so AI-generated content sounds like you, not a robot.</p>
+        </div>
+        <div class="feature-card">
+            <h3>2. Connect Platforms</h3>
+            <p>Link your TikTok, Instagram, YouTube, Facebook, X/Twitter, Threads, Bluesky, Spotify, and Discord accounts through secure OAuth.</p>
+        </div>
+        <div class="feature-card">
+            <h3>3. Create Content</h3>
+            <p>Use AI to generate captions tailored to each platform, or write your own. Add images, videos, and hashtags. Every caption gets an authenticity score.</p>
+        </div>
+        <div class="feature-card">
+            <h3>4. Publish &amp; Schedule</h3>
+            <p>Post to all connected platforms at once, or schedule content for optimal times. Track performance with built-in analytics.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PLATFORMS                               -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="platforms">
+    <h2>Supported Platforms</h2>
+    <p class="subtitle">TribeBuilder integrates with these platforms through their official APIs. Every connection uses standard OAuth 2.0.</p>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>TikTok</h3>
+            <p>Content Posting API v2 — photo (PULL_FROM_URL) and video (FILE_UPLOAD) publishing with three-tier post mode fallback.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Instagram</h3>
+            <p>Graph API — photo and carousel publishing with image hosting via Supabase Storage. Insights API for analytics.</p>
+        </div>
+        <div class="feature-card">
+            <h3>YouTube</h3>
+            <p>Data API v3 — video upload with metadata, privacy settings, and channel management.</p>
+        </div>
+        <div class="feature-card">
+            <h3>X / Twitter</h3>
+            <p>API v2 — tweet posting with media upload and OAuth 2.0 PKCE authentication.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Facebook</h3>
+            <p>Graph API — page posting with photo/video support and Page Insights analytics.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Threads</h3>
+            <p>Threads Publishing API — text and image posts via Meta's content publishing endpoint.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Bluesky</h3>
+            <p>AT Protocol — decentralized posting with image blob upload and app password authentication.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Spotify</h3>
+            <p>Web API — profile display and listening stats for analytics. OAuth 2.0 + PKCE flow.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ARCHITECTURE                            -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section" id="architecture">
+    <h2>Architecture</h2>
+    <p class="subtitle">Built as a modular iOS application using modern Swift concurrency, SwiftUI, and SwiftData.</p>
+
+    <div class="code-block">
+        <span class="comment">// Unified publisher protocol — every platform implements this</span><br>
+        <span class="keyword">protocol</span> <span class="type">SocialMediaPublisher</span> {<br>
+        &nbsp;&nbsp;<span class="keyword">var</span> platform: <span class="type">SocialPlatform</span> { <span class="keyword">get</span> }<br>
+        &nbsp;&nbsp;<span class="keyword">func</span> publishText(_ text: <span class="type">String</span>, mediaURLs: [<span class="type">URL</span>]?) <span class="keyword">async throws</span> -> <span class="type">PublishResult</span><br>
+        &nbsp;&nbsp;<span class="keyword">func</span> refreshToken(_ tokens: <span class="type">OAuthTokens</span>) <span class="keyword">async throws</span> -> <span class="type">OAuthTokens</span><br>
+        }
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>AI Content Generation</h3>
+            <p>Multi-provider BYOK support for ChatGPT, Gemini, Grok, DALL-E, and Gemini Vision. Persona-driven prompts with authenticity scoring.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Publishing Pipeline</h3>
+            <p>Three-tier fallback with retry logic, offline queue, and background task scheduling via BGTaskScheduler.</p>
+        </div>
+        <div class="feature-card">
+            <h3>OAuth Management</h3>
+            <p>Unified OAuth 2.0 + PKCE flow for all platforms. Proactive token refresh and Keychain-backed secure storage.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Strategy Engine</h3>
+            <p>AI-powered content strategy planning with persona matching, auto-scheduling, and review queue for generated content.</p>
         </div>
     </div>
 
-    <div class="section" id="platforms">
-        <h2>Supported Platforms</h2>
-        <p>TribeBuilder integrates with major social media platforms through their official APIs:</p>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <h3>TikTok</h3>
-                <p>Content Posting API v2 — photo (PULL_FROM_URL) and video (FILE_UPLOAD) with three-tier post mode fallback.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Instagram</h3>
-                <p>Graph API — photo and carousel publishing with image hosting via Supabase Storage.</p>
-            </div>
-            <div class="feature-card">
-                <h3>YouTube</h3>
-                <p>Data API v3 — video upload with metadata, privacy settings, and channel management.</p>
-            </div>
-            <div class="feature-card">
-                <h3>X / Twitter</h3>
-                <p>API v2 — tweet posting with media upload, thread support, and OAuth 2.0 PKCE.</p>
-            </div>
-        </div>
+    <div class="tech-stack" style="margin-top:28px;">
+        <span class="tech-tag">Swift 5.9</span>
+        <span class="tech-tag">SwiftUI</span>
+        <span class="tech-tag">SwiftData</span>
+        <span class="tech-tag">iOS 17+</span>
+        <span class="tech-tag">Async/Await</span>
+        <span class="tech-tag">WidgetKit</span>
+        <span class="tech-tag">BGTaskScheduler</span>
+        <span class="tech-tag">OSLog</span>
+        <span class="tech-tag">ASWebAuthenticationSession</span>
+        <span class="tech-tag">StoreKit 2</span>
+        <span class="tech-tag">Supabase</span>
+        <span class="tech-tag">Cloudflare Workers</span>
     </div>
+</div>
 
-    <div class="section">
-        <h2>Tech Stack</h2>
-        <div class="tech-stack">
-            <span class="tech-tag">Swift 5.9</span>
-            <span class="tech-tag">SwiftUI</span>
-            <span class="tech-tag">SwiftData</span>
-            <span class="tech-tag">iOS 17+</span>
-            <span class="tech-tag">Async/Await</span>
-            <span class="tech-tag">WidgetKit</span>
-            <span class="tech-tag">BGTaskScheduler</span>
-            <span class="tech-tag">OSLog</span>
-            <span class="tech-tag">Supabase</span>
-            <span class="tech-tag">Cloudflare Workers</span>
-            <span class="tech-tag">StoreKit 2</span>
-            <span class="tech-tag">ASWebAuthenticationSession</span>
-        </div>
+<!-- ═══════════════════════════════════════ -->
+<!-- FOOTER                                  -->
+<!-- ═══════════════════════════════════════ -->
+<footer>
+    <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/data-deletion.html">Data Deletion</a>
+        <a href="https://github.com/lanmind2001">GitHub</a>
     </div>
+    <p>TribeBuilder &copy; 2026 Brown Technologies Inc. &middot; Built with Swift</p>
+</footer>
 
-    <footer>
-        <p>TribeBuilder &copy; 2026 &middot; Built with Swift &middot; <a href="https://github.com/lanmind2001">@lanmind2001</a></p>
-    </footer>
 </body>
 </html>
