@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TribeKeeper Privacy Policy</title>
+<style>
+  :root{--accent:#185478;--ink:#101f2e;--muted:#5b6672;--line:#e4e7ea;--bg:#fafbfc}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+  .brand{display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:28px}
+  .seal{width:52px;height:52px;border-radius:50%;background:linear-gradient(180deg,#102036,#185478);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;letter-spacing:1px}
+  .brand h1{font-size:20px;margin:0}
+  .brand span{display:block;font-size:11px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin:34px 0 8px}
+  .updated{color:var(--muted);font-size:13px}
+  p{margin:10px 0}a{color:var(--accent)}
+  ul{margin:10px 0 10px 20px;padding:0}li{margin:6px 0}
+  .callout{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);padding:14px 16px;margin:16px 0;border-radius:4px}
+  .foot{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><div class="seal">TK</div><div><h1>TribeKeeper</h1><span>Privacy Policy</span></div></div>
+    <p class="updated">Last updated: August 2026</p>
+
+    <p>TribeKeeper is operated by Brown Technologies Inc. The app preserves recorded
+    conversations as a searchable, citable archive, so families and organizations can
+    ask questions and receive answers grounded in what a person actually said.</p>
+
+    <p>Because that archive contains people's words and voices, privacy is a design
+    constraint rather than a policy afterthought. This page explains what is stored,
+    where it is processed, and the control you have over it.</p>
+
+    <div class="callout"><strong>Beta note.</strong> During TestFlight beta testing, the
+    app operates on a built-in fictional demo archive. Recordings you make and their
+    transcripts remain on your device, and no account is created. The sections below
+    describe the app as a whole, including the optional server-backed archive.</div>
+
+    <h2>Recording and transcription happen on your device</h2>
+    <p>Audio is captured only while you are on the Record screen and have tapped Record.
+    The app does not record in the background or when the app is closed. Speech is
+    transcribed on your iPhone or iPad using Apple's on-device speech recognition; the
+    audio is not sent to Apple or to us for transcription.</p>
+
+    <h2>What the archive stores</h2>
+    <p>When you choose to save material to an archive, TribeKeeper stores:</p>
+    <ul>
+      <li><strong>Transcribed statements</strong> and the text of imported material (for example emails or messages you supply), each attributed to a person.</li>
+      <li><strong>Source information</strong> — title, date, type of source, and timestamps — so every answer can cite where it came from.</li>
+      <li><strong>Identifiers used to attribute statements</strong> to the right person: display names, and where you supply them, email addresses and phone numbers.</li>
+      <li><strong>Voice signatures</strong>, if you use voice matching (see below).</li>
+      <li><strong>An activity log</strong> of consent changes, exclusions, identity merges, and archive queries, which you can review in the app.</li>
+    </ul>
+
+    <h2>Voice signatures (biometric information)</h2>
+    <p>To identify a specific person's voice across many recordings, TribeKeeper can create
+    a mathematical voice signature — a numeric representation of vocal characteristics. This
+    is biometric information and is treated accordingly:</p>
+    <ul>
+      <li>It is created only for people you deliberately enroll, and only to attribute statements to the correct person within your own archive.</li>
+      <li>Signatures for speakers who are not identified are discarded once processing finishes and are not retained.</li>
+      <li>Voice signatures are never sold, licensed, or disclosed to third parties, and are not used to identify anyone outside your archive.</li>
+      <li>They are deleted when you delete the person or the archive, and permanently within 30 days of your account being closed.</li>
+      <li>Voice matching is optional. Archives can be built without it.</li>
+    </ul>
+
+    <h2>Information about other people</h2>
+    <p>An archive is, by nature, about someone other than you. TribeKeeper requires that a
+    basis be recorded before an archive of a person can be created — either that person's
+    consent while living, authorization from their estate or legal representative, or a
+    documented organizational policy for workplace recordings. The app enforces this before
+    an archive becomes usable.</p>
+    <p>You are responsible for having the right to the recordings and messages you supply,
+    and for complying with the recording and consent laws that apply where you and the other
+    participants are located. Some jurisdictions require every participant's consent to
+    record a conversation.</p>
+
+    <h2>What we do not do</h2>
+    <p>We do not sell your data or the contents of your archive. We do not use advertising
+    trackers, and the app contains no advertising or third-party analytics SDKs. We do not
+    train artificial intelligence models on your archive. We do not track you across other
+    apps or websites.</p>
+
+    <h2>Service providers</h2>
+    <p>If you connect the optional server-backed archive, its contents are stored using our
+    infrastructure providers (Cloudflare) solely to operate the service. When you use the
+    optional conversational feature with a language model, the relevant excerpts from your
+    archive and your question are sent to that provider (Anthropic) to compose a response;
+    they are not used to train models. We share information only as needed to operate the
+    service, or when required by law.</p>
+
+    <h2>How answers are generated</h2>
+    <p>The conversational feature retrieves statements from your archive and, where enabled,
+    uses a language model to phrase a response. Answers identify themselves as generated by
+    software drawing on recordings, and distinguish material quoted from the archive — with
+    citations — from inference in a person's style. When the archive does not cover a
+    question, the app declines to answer rather than inventing one. TribeKeeper is not the
+    person, does not speak for them, and its output should not be treated as their advice,
+    instruction, or authorization.</p>
+
+    <h2>Your control</h2>
+    <ul>
+      <li><strong>Export.</strong> You can export an archive — statements, sources, and structure — in an open format at any time.</li>
+      <li><strong>Exclude.</strong> Any source can be removed from the archive so it no longer appears in searches or answers.</li>
+      <li><strong>Retire.</strong> An archive can be closed so it is preserved but no longer answers questions.</li>
+      <li><strong>Delete.</strong> You can delete a person, a source, or an entire archive, including voice signatures and transcripts. Deletion requests may also be sent to the address below.</li>
+    </ul>
+
+    <h2>Retention</h2>
+    <p>Archive content is kept until you delete it — the purpose of the product is
+    preservation. Activity logs are retained for up to 24 months. When an account is closed,
+    archive content and voice signatures are permanently deleted within 30 days.</p>
+
+    <h2>Children</h2>
+    <p>TribeKeeper is intended for adults and is not directed to children under 13. Archives
+    of a deceased person are not intended for use by young children without a parent or
+    guardian present.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes materially, the updated date above will change and, where the
+    change affects how your archive is handled, we will notify you in the app.</p>
+
+    <h2>Contact</h2>
+    <p>Questions, deletion requests, or privacy concerns: email
+    <a href="mailto:support@browntechai.net">support@browntechai.net</a>.</p>
+
+    <div class="foot">Copyright 2026 Brown Technologies Inc. - TribeKeeper</div>
+  </div>
+</body>
+</html>
